@@ -9,7 +9,7 @@ module Cave::Scene
       @start_scene = nil
       @items = GSF::MenuItems.new(
         font: Font.default,
-        items: ["start", "exit"],
+        items: ["start", "editor", "exit"],
         initial_focused_index: 0
       )
     end
@@ -27,6 +27,8 @@ module Cave::Scene
         case items.focused_label
         when "start"
           @start_scene = :main
+        when "editor"
+          @start_scene = :editor
         when "exit"
           @exit = true
         end

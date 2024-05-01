@@ -1,7 +1,5 @@
 module Cave
   class Line
-    alias Point = NamedTuple(x: Int32, y: Int32)
-
     getter points : Array(Point)
     getter thickness : Int32 | Float32
 
@@ -9,7 +7,11 @@ module Cave
     OutlineColor = SF::Color.new(153, 153, 0)
     Thickness = 4
 
-    def initialize(@points, @thickness = Thickness)
+    def initialize(@points = [] of Point, @thickness = Thickness)
+    end
+
+    def add_point(point : Point)
+      @points << point
     end
 
     def draw(window : SF::RenderWindow)

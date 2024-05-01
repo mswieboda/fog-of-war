@@ -3,7 +3,7 @@ require "./player"
 
 module Cave
   class Level
-    getter borders = [] of Line
+    getter borders : Array(Line)
     getter player
 
     Color = SF::Color.new(153, 153, 0, 30)
@@ -13,7 +13,7 @@ module Cave
     def initialize()
       @player = Player.new(x: 300, y: 300)
 
-      @lines = [
+      @borders = [
         Line.new(
           points: [
             {x: 100, y: 300},
@@ -32,7 +32,7 @@ module Cave
 
     def draw(window : SF::RenderWindow)
       player.draw(window)
-      @lines.each(&.draw(window))
+      borders.each(&.draw(window))
     end
   end
 end
