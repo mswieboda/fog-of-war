@@ -1,13 +1,19 @@
+require "json"
+
 module Cave
   class Line
+    include JSON::Serializable
+
     getter points : Array(Point)
-    getter thickness : Int32 | Float32
 
-    Color = SF::Color.new(153, 153, 0, 30)
-    OutlineColor = SF::Color.new(153, 153, 0)
-    Thickness = 4
+    Color = SF::Color.new(153, 153, 0)
+    Thickness = 8
 
-    def initialize(@points = [] of Point, @thickness = Thickness)
+    def initialize(@points = [] of Point)
+    end
+
+    def thickness
+      Thickness
     end
 
     def add_point(point : Point)
@@ -15,9 +21,19 @@ module Cave
     end
 
     def draw(window : SF::RenderWindow)
+      draw_point_circle(window, points.first) if points.size == 1
+
       (points.size - 1).times do |i|
         draw_line(window, points[i], points[i + 1])
       end
+    end
+
+    def draw_point_circle(window, point)
+      circle = SF::CircleShape.new(thickness)
+      circle.fill_color = Color
+      circle.position = {point[:x], point[:y]}
+
+      window.draw(circle)
     end
 
     def draw_line(window, point, next_point)
@@ -37,7 +53,7 @@ module Cave
 
       rectangle = SF::RectangleShape.new
       rectangle.size = SF.vector2f(width, thickness)
-      rectangle.fill_color = SF::Color::Red
+      rectangle.fill_color = Color
       rectangle.position = {p1[:x], p1[:y]}
       rectangle.rotate(rotation)
 

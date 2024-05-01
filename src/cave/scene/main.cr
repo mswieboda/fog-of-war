@@ -1,4 +1,5 @@
 require "../level"
+require "../player"
 require "../hud"
 
 module Cave::Scene
@@ -6,6 +7,7 @@ module Cave::Scene
     getter view : GSF::View
     getter hud
     getter level
+    getter player
 
     def initialize(window)
       super(:main)
@@ -15,6 +17,7 @@ module Cave::Scene
       view.zoom(1 / Screen.scaling_factor)
 
       @level = Level.new
+      @player = Player.new(x: 300, y: 300)
       @hud = HUD.new
     end
 
@@ -25,11 +28,12 @@ module Cave::Scene
       end
 
       level.update(frame_time, keys)
+      player.update(frame_time, keys)
       hud.update(frame_time)
     end
 
     def draw(window)
-      level.draw(window)
+      level.draw(window, player)
       hud.draw(window)
     end
   end

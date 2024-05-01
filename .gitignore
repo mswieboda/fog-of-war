@@ -7,3 +7,6 @@ build
 
 *.aseprite
 .DS_Store
+
+# level data
+assets/level_data.dat

@@ -1,2 +1,4 @@
 Lint/Formatting:
   Enabled: false
+Documentation/DocumentationAdmonition:
+  Enabled: false
