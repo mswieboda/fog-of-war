@@ -2,7 +2,6 @@ module Cave
   class Player
     getter x : Int32 | Float32
     getter y : Int32 | Float32
-    getter animations
 
     Radius = 64
     Size = Radius * 2
