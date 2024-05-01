@@ -1,6 +1,7 @@
 NAME=cave
 SHELL = /bin/sh
-CC = crystal build
+OPTS = CRYSTAL_OPTS="--link-flags=-Wl,-ld_classic"
+CC = ${OPTS} crystal build
 BUILD_DIR = build
 OUT_FILE = ${BUILD_DIR}/${NAME}
 SOURCE_FILES = src/${NAME}.cr
