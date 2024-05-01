@@ -1,6 +1,6 @@
 require "./font"
 
-module GameSFTemplate
+module Cave
   class HUD
     getter text
 

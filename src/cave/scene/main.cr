@@ -1,7 +1,7 @@
 require "../player"
 require "../hud"
 
-module GameSFTemplate::Scene
+module Cave::Scene
   class Main < GSF::Scene
     getter view : GSF::View
     getter hud
