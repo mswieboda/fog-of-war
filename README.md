@@ -59,3 +59,18 @@ you'll need installed:
 - `platypus` ([Platypus](https://sveinbjorn.org/platypus) binary) via `brew install --cask platypus` then in `Platypus > Preferences` install the command line tool
 
 zips up SFML libs, ext libs, assets, `cave.app` (created by [Platypus](https://sveinbjorn.org/platypus)) to `build/cave-mac.zip`
+
+
+## Tools
+
+### Linting
+
+```
+bin/ameba
+```
+
+to autofix:
+
+```
+bin/ameba --fix
+```
