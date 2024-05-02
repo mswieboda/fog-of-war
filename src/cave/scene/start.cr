@@ -18,6 +18,11 @@ module Cave::Scene
       super
 
       @start_scene = nil
+      @items = GSF::MenuItems.new(
+        font: Font.default,
+        items: ["start", "editor", "exit"],
+        initial_focused_index: 0
+      )
     end
 
     def update(frame_time, keys : Keys, mouse : Mouse, joysticks : Joysticks)

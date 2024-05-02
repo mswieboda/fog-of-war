@@ -44,9 +44,17 @@ module Cave::Scene
     end
 
     def reset
+      super
+
       @level_data = LevelData.load
       @level = Level.new
       @menu = false
+      @menu_items = GSF::MenuItems.new(
+        font: Font.default,
+        size: 32,
+        items: ["continue", "save & test", "save", "new", "load", "exit"],
+        initial_focused_index: 0
+      )
       @menu_levels = false
       @test_level_key = nil
       @item_to_place_index = 0

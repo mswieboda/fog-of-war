@@ -24,6 +24,14 @@ module Cave::Scene
       @hud = HUD.new
     end
 
+    def reset
+      super
+
+      @level_data = LevelData.load
+      @level = level_data.levels[level_data.levels.keys.sample]
+      @player = Player.new(level.player_spawn)
+    end
+
     def switch_level(level_key)
       @level_data = LevelData.load
 
