@@ -7,7 +7,7 @@ module Cave::Scene
   class Main < GSF::Scene
     getter view : GSF::View
     getter level_data : LevelData
-    getter level
+    getter level : Level
     getter player
     getter hud
 
@@ -19,7 +19,7 @@ module Cave::Scene
       view.zoom(1 / Screen.scaling_factor)
 
       @level_data = LevelData.load
-      @level = Level.new
+      @level = level_data.levels[level_data.levels.keys.sample]
       @player = Player.new(level.player_spawn)
       @hud = HUD.new
     end

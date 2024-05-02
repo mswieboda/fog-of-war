@@ -6,10 +6,12 @@ module Cave
     Radius = 64
     Size = Radius * 2
     Speed = 640
+    VisibilityRadius = 256
 
     Color = SF::Color.new(153, 0, 0, 30)
     OutlineColor = SF::Color.new(153, 0, 0)
     OutlineThickness = 4
+    VisibilityColor = SF::Color.new(153, 153, 0, 15)
 
     def initialize(point : Point = {x: 0, y: 0})
       @x = point[:x]
@@ -72,17 +74,6 @@ module Cave
       {dx, dy}
     end
 
-    def draw(window : SF::RenderWindow)
-      circle = SF::CircleShape.new(Radius - OutlineThickness)
-      circle.fill_color = Color
-      circle.outline_color = OutlineColor
-      circle.outline_thickness = OutlineThickness
-      circle.position = {x, y}
-      circle.origin = {size / 2, size / 2}
-
-      window.draw(circle)
-    end
-
     def move(dx, dy)
       @x += dx
       @y += dy
@@ -91,6 +82,31 @@ module Cave
     def jump_to_point(point : Point)
       @x = point[:x]
       @y = point[:y]
+    end
+
+    def draw(window : SF::RenderWindow)
+      draw_visibility(window)
+      draw_player(window)
+    end
+
+    def draw_visibility(window)
+      circle = SF::CircleShape.new(VisibilityRadius)
+      circle.fill_color = VisibilityColor
+      circle.position = {x, y}
+      circle.origin = {VisibilityRadius, VisibilityRadius}
+
+      window.draw(circle)
+    end
+
+    def draw_player(window)
+      circle = SF::CircleShape.new(Radius - OutlineThickness)
+      circle.fill_color = Color
+      circle.outline_color = OutlineColor
+      circle.outline_thickness = OutlineThickness
+      circle.position = {x, y}
+      circle.origin = {size / 2, size / 2}
+
+      window.draw(circle)
     end
   end
 end
