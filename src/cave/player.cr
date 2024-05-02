@@ -26,10 +26,6 @@ module Cave
       Size
     end
 
-    def visibility_radius
-      VisibilityRadius
-    end
-
     def update(frame_time, keys : Keys, border : Line)
       update_movement(frame_time, keys, border)
     end
