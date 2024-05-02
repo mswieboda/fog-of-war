@@ -11,7 +11,7 @@ module Cave
     Color = SF::Color.new(153, 0, 0, 30)
     OutlineColor = SF::Color.new(153, 0, 0)
     OutlineThickness = 4
-    VisibilityColor = SF::Color.new(153, 153, 0, 15)
+    VisibilityColor = SF::Color.new(255, 255, 255, 5)
 
     def initialize(point : Point = {x: 0, y: 0})
       @x = point[:x]
