@@ -33,7 +33,12 @@ module Cave
       if scene.exit?
         @exit = true
       elsif start_scene = start.start_scene
-        switch(main) if start_scene == :main
+        if start_scene == :main
+          switch(main)
+
+          main.start
+        end
+
         switch(editor) if start_scene == :editor
       end
     end
@@ -43,7 +48,9 @@ module Cave
         switch(start)
       elsif level_key = editor.test_level_key
         switch(main)
+
         main.switch_level(level_key)
+        main.start
       end
     end
   end

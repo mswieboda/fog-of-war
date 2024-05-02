@@ -11,6 +11,8 @@ module Cave::Scene
     getter player
     getter hud
 
+    delegate start, to: level
+
     def initialize(window)
       super(:main)
 

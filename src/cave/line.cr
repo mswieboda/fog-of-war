@@ -4,7 +4,7 @@ module Cave
   class Line
     include JSON::Serializable
 
-    getter points : Array(Point)
+    getter points : Array(Point) = [] of Point
 
     Color = SF::Color.new(153, 153, 0)
     Thickness = 8
