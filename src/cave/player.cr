@@ -16,6 +16,10 @@ module Cave
       @y = point[:y]
     end
 
+    def radius
+      Radius
+    end
+
     def size
       Size
     end
@@ -36,7 +40,7 @@ module Cave
       return if dx == 0 && dy == 0
 
       dx, dy = move_with_speed(frame_time, dx, dy)
-      dx, dy = move_with_room(dx, dy, border)
+      dx, dy = move_with_level(dx, dy, border)
 
       return if dx == 0 && dy == 0
 
@@ -52,7 +56,15 @@ module Cave
       {dx, dy}
     end
 
-    def move_with_room(dx, dy, border)
+    def move_with_level(dx, dy, border)
+      # TODO: switch to individual x + dx, and y + dy to only modify one
+      if border.collision_with_circle?(x + dx, y + dy, radius)
+        dx = 0
+        dy = 0
+      end
+
+      return {dx, dy} if dx == 0 && dy == 0
+
       # room wall collisions
       dx = 0 if x + dx < 0 || x + dx + size > GSF::Screen.width
       dy = 0 if y + dy < 0 || y + dy + size > GSF::Screen.height
@@ -66,6 +78,7 @@ module Cave
       circle.outline_color = OutlineColor
       circle.outline_thickness = OutlineThickness
       circle.position = {x, y}
+      circle.origin = {size / 2, size / 2}
 
       window.draw(circle)
     end
@@ -78,13 +91,6 @@ module Cave
     def jump_to_point(point : Point)
       @x = point[:x]
       @y = point[:y]
-    end
-
-    def to_centered_point(point : Point) : Point
-      x = point[:x] - size / 2
-      y = point[:y] - size / 2
-
-      {x: x.to_i, y: y.to_i}
     end
   end
 end

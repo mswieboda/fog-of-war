@@ -43,6 +43,16 @@ module Cave::Scene
       @player = Player.new(level.player_spawn)
     end
 
+    def reset
+      @level_data = LevelData.load
+      @level = Level.new
+      @menu = false
+      @menu_levels = false
+      @test_level_key = nil
+      @item_to_place_index = 0
+      @player = Player.new(level.player_spawn)
+    end
+
     def item_to_place
       ItemsToPlace[@item_to_place_index]
     end
@@ -119,6 +129,7 @@ module Cave::Scene
 
         if found_level = level_data.levels[key]
           @level = found_level
+          @player.jump_to_point(level.player_spawn)
           @menu_levels = false
         else
           puts "Error: level \"#{key}\" not found in level data"
@@ -143,9 +154,8 @@ module Cave::Scene
       if item_to_place == "border"
         border.add_point(point)
       elsif item_to_place == "player"
-        centered_point = player.to_centered_point(point)
-        level.player_spawn = centered_point
-        player.jump_to_point(centered_point)
+        level.player_spawn = point
+        player.jump_to_point(point)
       end
     end
 
