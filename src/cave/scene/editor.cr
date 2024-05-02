@@ -212,7 +212,7 @@ module Cave::Scene
       rect = SF::RectangleShape.new
       rect.size = SF.vector2f(
         text_bounds.width + PaddingSelection * 2,
-        text_bounds.height +  + PaddingSelection * 2
+        text_bounds.height + PaddingSelection * 2
       )
       rect.fill_color = SF::Color::Transparent
       rect.outline_color = TextColor
