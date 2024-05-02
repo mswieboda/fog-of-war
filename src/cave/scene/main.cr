@@ -16,6 +16,7 @@ module Cave::Scene
 
       @view = GSF::View.from_default(window).dup
 
+      view.reset(0, 0, Screen.width, Screen.height)
       view.zoom(1 / Screen.scaling_factor)
 
       @level_data = LevelData.load
@@ -48,11 +49,19 @@ module Cave::Scene
       end
 
       level.update(frame_time, keys, player)
+
+      view.center(player.x, player.y)
+
       hud.update(frame_time)
     end
 
     def draw(window)
+      view.set_current
+
       level.draw(window, player)
+
+      view.set_default_current
+
       hud.draw(window)
     end
   end
