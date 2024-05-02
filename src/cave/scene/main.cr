@@ -1,3 +1,4 @@
+require "../level_data"
 require "../level"
 require "../player"
 require "../hud"
@@ -5,9 +6,10 @@ require "../hud"
 module Cave::Scene
   class Main < GSF::Scene
     getter view : GSF::View
-    getter hud
+    getter level_data : LevelData
     getter level
     getter player
+    getter hud
 
     def initialize(window)
       super(:main)
@@ -16,9 +18,23 @@ module Cave::Scene
 
       view.zoom(1 / Screen.scaling_factor)
 
+      @level_data = LevelData.load
       @level = Level.new
       @player = Player.new(x: 300, y: 300)
       @hud = HUD.new
+    end
+
+    def reset
+      @level = Level.new
+      @player = Player.new(x: 300, y: 300)
+
+      super
+    end
+
+    def switch_level(level_key)
+      if found_level = level_data.levels[level_key]
+        @level = found_level
+      end
     end
 
     def update(frame_time, keys : Keys, mouse : Mouse, joysticks : Joysticks)

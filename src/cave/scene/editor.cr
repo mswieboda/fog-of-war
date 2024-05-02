@@ -10,11 +10,12 @@ module Cave::Scene
     getter menu_items
     getter? menu_levels
     getter menu_level_items
+    getter test_level_key : String?
 
     delegate border, to: level
 
     def initialize(window)
-      super(:main)
+      super(:editor)
 
       @view = GSF::View.from_default(window).dup
 
@@ -26,6 +27,7 @@ module Cave::Scene
       @menu_items = GSF::MenuItems.new(Font.default)
       @menu_levels = false
       @menu_level_items = GSF::MenuItems.new(Font.default)
+      @test_level_key = nil
     end
 
     def open_menu
@@ -33,7 +35,7 @@ module Cave::Scene
       @menu_items = GSF::MenuItems.new(
         font: Font.default,
         size: 32,
-        items: ["continue", "save", "new", "load", "exit"],
+        items: ["continue", "save & test", "save", "new", "load", "exit"],
         initial_focused_index: 0
       )
     end
@@ -58,6 +60,11 @@ module Cave::Scene
       if menu_items.selected?(keys, mouse, joysticks)
         case menu_items.focused_label
         when "continue"
+          @menu = false
+        when "save & test"
+          level_data.update_level(level)
+          level_data.save
+          @test_level_key = level.key
           @menu = false
         when "save"
           level_data.update_level(level)

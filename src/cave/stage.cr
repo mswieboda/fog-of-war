@@ -21,16 +21,29 @@ module Cave
     def check_scenes
       case scene.name
       when :start
-        if scene.exit?
-          @exit = true
-        elsif start_scene = start.start_scene
-          switch(main) if start_scene == :main
-          switch(editor) if start_scene == :editor
-        end
+        check_start
       when :main
         switch(start) if scene.exit?
       when :editor
-        switch(start) if scene.exit?
+        check_editor
+      end
+    end
+
+    def check_start
+      if scene.exit?
+        @exit = true
+      elsif start_scene = start.start_scene
+        switch(main) if start_scene == :main
+        switch(editor) if start_scene == :editor
+      end
+    end
+
+    def check_editor
+      if scene.exit?
+        switch(start)
+      elsif level_key = editor.test_level_key
+        switch(main)
+        main.switch_level(level_key)
       end
     end
   end
