@@ -8,12 +8,14 @@ module Cave
 
     getter key : String
     getter border : Line
+    property player_spawn : Point = {x: 0, y: 0}
 
     Color = SF::Color.new(153, 153, 0, 30)
     OutlineColor = SF::Color.new(153, 153, 0)
     OutlineThickness = 4
 
     def initialize(@border = Line.new, @key = UUID.random.to_s)
+      @player_spawn = {x: -300, y: -300}
     end
 
     def display_name

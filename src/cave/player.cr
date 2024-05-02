@@ -11,9 +11,9 @@ module Cave
     OutlineColor = SF::Color.new(153, 0, 0)
     OutlineThickness = 4
 
-    def initialize(x = 0, y = 0)
-      @x = x
-      @y = y
+    def initialize(point : Point = {x: 0, y: 0})
+      @x = point[:x]
+      @y = point[:y]
     end
 
     def size
@@ -73,6 +73,18 @@ module Cave
     def move(dx, dy)
       @x += dx
       @y += dy
+    end
+
+    def jump_to_point(point : Point)
+      @x = point[:x]
+      @y = point[:y]
+    end
+
+    def to_centered_point(point : Point) : Point
+      x = point[:x] - size / 2
+      y = point[:y] - size / 2
+
+      {x: x.to_i, y: y.to_i}
     end
   end
 end

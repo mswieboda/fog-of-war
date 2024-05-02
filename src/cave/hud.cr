@@ -4,7 +4,7 @@ module Cave
   class HUD
     getter text
 
-    Margin = 10
+    Margin = 8
 
     TextColor = SF::Color::Green
 

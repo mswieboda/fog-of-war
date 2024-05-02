@@ -20,13 +20,16 @@ module Cave::Scene
 
       @level_data = LevelData.load
       @level = Level.new
-      @player = Player.new(x: 300, y: 300)
+      @player = Player.new(level.player_spawn)
       @hud = HUD.new
     end
 
     def switch_level(level_key)
+      @level_data = LevelData.load
+
       if found_level = level_data.levels[level_key]
         @level = found_level
+        @player.jump_to_point(level.player_spawn)
       end
     end
 

@@ -11,6 +11,12 @@ module Cave::Scene
     getter? menu_levels
     getter menu_level_items
     getter test_level_key : String?
+    getter player
+
+    TextColor = SF::Color::Green
+    Margin = 64
+    PaddingSelection = 16
+    ItemsToPlace = ["border", "player"]
 
     delegate border, to: level
 
@@ -24,25 +30,26 @@ module Cave::Scene
       @level_data = LevelData.load
       @level = Level.new
       @menu = false
-      @menu_items = GSF::MenuItems.new(Font.default)
-      @menu_levels = false
-      @menu_level_items = GSF::MenuItems.new(Font.default)
-      @test_level_key = nil
-    end
-
-    def open_menu
-      @menu = true
       @menu_items = GSF::MenuItems.new(
         font: Font.default,
         size: 32,
         items: ["continue", "save & test", "save", "new", "load", "exit"],
         initial_focused_index: 0
       )
+      @menu_levels = false
+      @menu_level_items = GSF::MenuItems.new(Font.default)
+      @test_level_key = nil
+      @item_to_place_index = 0
+      @player = Player.new(level.player_spawn)
+    end
+
+    def item_to_place
+      ItemsToPlace[@item_to_place_index]
     end
 
     def update(frame_time, keys : Keys, mouse : Mouse, joysticks : Joysticks)
       if keys.just_pressed?(Keys::Escape)
-        open_menu unless menu?
+        @menu = !@menu
       end
 
       if menu?
@@ -106,7 +113,7 @@ module Cave::Scene
 
         if key == "back"
           @menu_levels = false
-          open_menu
+          @menu = true
           return
         end
 
@@ -120,13 +127,26 @@ module Cave::Scene
     end
 
     def editor_update(frame_time, keys, mouse)
-      add_border_point(mouse)
+      place_item(mouse)
+
+      if keys.just_pressed?(Keys::Tab)
+        @item_to_place_index += 1
+        @item_to_place_index = 0 if @item_to_place_index >= ItemsToPlace.size
+      end
     end
 
-    def add_border_point(mouse)
+    def place_item(mouse)
       return unless mouse.just_pressed?(Mouse::Left)
 
-      border.add_point({x: mouse.x, y: mouse.y})
+      point = {x: mouse.x, y: mouse.y}
+
+      if item_to_place == "border"
+        border.add_point(point)
+      elsif item_to_place == "player"
+        centered_point = player.to_centered_point(point)
+        level.player_spawn = centered_point
+        player.jump_to_point(centered_point)
+      end
     end
 
     def draw(window)
@@ -150,7 +170,49 @@ module Cave::Scene
     end
 
     def draw_editor(window)
+      draw_hud(window)
       border.draw(window)
+      player.draw(window)
+    end
+
+    def draw_hud(window)
+      text_border = SF::Text.new("border", Font.default, 24)
+      text_border.fill_color = TextColor
+      text_border.position = {Margin, Margin}
+
+      window.draw(text_border)
+
+      text_border_width = text_border.global_bounds.width
+
+      text_player = SF::Text.new("player", Font.default, 24)
+      text_player.fill_color = TextColor
+      text_player.position = {Margin, Margin}
+      text_player.position = {text_border.position.x + text_border_width + Margin, Margin}
+
+      window.draw(text_player)
+
+      text = text_border
+
+      if item_to_place == "player"
+        text = text_player
+      end
+
+      text_bounds = text_border.global_bounds
+
+      rect = SF::RectangleShape.new
+      rect.size = SF.vector2f(
+        text_bounds.width + PaddingSelection * 2,
+        text_bounds.height +  + PaddingSelection * 2
+      )
+      rect.fill_color = SF::Color::Transparent
+      rect.outline_color = TextColor
+      rect.outline_thickness = 3
+      rect.position = {
+        text.position.x - PaddingSelection,
+        text.position.y - PaddingSelection
+      }
+
+      window.draw(rect)
     end
 
     def draw_menu_background(window)
