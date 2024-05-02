@@ -20,10 +20,11 @@ module Cave
       "#{border.points.size} (#{key[0..7]})"
     end
 
-    def update(_frame_time, _keys : Keys)
+    def update(frame_time, keys : Keys, player)
+      player.update(frame_time, keys, border)
     end
 
-    def draw(window : SF::RenderWindow, player : Player)
+    def draw(window : SF::RenderWindow, player)
       border.draw(window)
       player.draw(window)
     end

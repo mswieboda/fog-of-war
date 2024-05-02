@@ -20,11 +20,11 @@ module Cave
       Size
     end
 
-    def update(frame_time, keys : Keys)
-      update_movement(frame_time, keys)
+    def update(frame_time, keys : Keys, border : Line)
+      update_movement(frame_time, keys, border)
     end
 
-    def update_movement(frame_time, keys : Keys)
+    def update_movement(frame_time, keys : Keys, border)
       dx = 0
       dy = 0
 
@@ -36,7 +36,7 @@ module Cave
       return if dx == 0 && dy == 0
 
       dx, dy = move_with_speed(frame_time, dx, dy)
-      dx, dy = move_with_room(dx, dy)
+      dx, dy = move_with_room(dx, dy, border)
 
       return if dx == 0 && dy == 0
 
@@ -52,7 +52,7 @@ module Cave
       {dx, dy}
     end
 
-    def move_with_room(dx, dy)
+    def move_with_room(dx, dy, border)
       # room wall collisions
       dx = 0 if x + dx < 0 || x + dx + size > GSF::Screen.width
       dy = 0 if y + dy < 0 || y + dy + size > GSF::Screen.height

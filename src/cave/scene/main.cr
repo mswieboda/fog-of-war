@@ -24,13 +24,6 @@ module Cave::Scene
       @hud = HUD.new
     end
 
-    def reset
-      @level = Level.new
-      @player = Player.new(x: 300, y: 300)
-
-      super
-    end
-
     def switch_level(level_key)
       if found_level = level_data.levels[level_key]
         @level = found_level
@@ -43,8 +36,7 @@ module Cave::Scene
         return
       end
 
-      level.update(frame_time, keys)
-      player.update(frame_time, keys)
+      level.update(frame_time, keys, player)
       hud.update(frame_time)
     end
 
