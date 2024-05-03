@@ -6,7 +6,7 @@ module Cave
 
     getter points : Array(Point)
 
-    Color = SF::Color.new(153, 153, 0)
+    Color = SF::Color.new(38, 25, 17)
     Thickness = 8
 
     def initialize(@points = [] of Point)

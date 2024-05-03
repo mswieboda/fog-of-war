@@ -44,6 +44,7 @@ module Cave
       elsif level_key = editor.test_level_key
         switch(main)
         main.switch_level(level_key)
+        main.init
       end
     end
   end

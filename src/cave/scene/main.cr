@@ -25,6 +25,11 @@ module Cave::Scene
       @hud = HUD.new
     end
 
+    def init
+      @level.init
+      @player.jump_to_point(level.player_spawn)
+    end
+
     def reset
       super
 
@@ -38,7 +43,6 @@ module Cave::Scene
 
       if found_level = level_data.levels[level_key]
         @level = found_level
-        @player.jump_to_point(level.player_spawn)
       end
     end
 

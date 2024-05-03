@@ -2,6 +2,7 @@ module Cave
   class Player
     getter x : Int32 | Float32
     getter y : Int32 | Float32
+    getter? just_moved
 
     Radius = 64
     Size = Radius * 2
@@ -11,7 +12,7 @@ module Cave
     Color = SF::Color.new(153, 0, 0, 30)
     OutlineColor = SF::Color.new(153, 0, 0)
     OutlineThickness = 4
-    VisibilityColor = SF::Color.new(255, 255, 255, 5)
+    VisibilityColor = SF::Color.new(127, 127, 127, 63)
 
     def initialize(point : Point = {x: 0, y: 0})
       @x = point[:x]
@@ -24,6 +25,10 @@ module Cave
 
     def size
       Size
+    end
+
+    def visibility_radius
+      VisibilityRadius
     end
 
     def update(frame_time, keys : Keys, border : Line)
@@ -77,25 +82,17 @@ module Cave
     def move(dx, dy)
       @x += dx
       @y += dy
+      @just_moved = true
     end
 
     def jump_to_point(point : Point)
       @x = point[:x]
       @y = point[:y]
+      @just_moved = true
     end
 
     def draw(window : SF::RenderWindow)
-      draw_visibility(window)
       draw_player(window)
-    end
-
-    def draw_visibility(window)
-      circle = SF::CircleShape.new(VisibilityRadius)
-      circle.fill_color = VisibilityColor
-      circle.position = {x, y}
-      circle.origin = {VisibilityRadius, VisibilityRadius}
-
-      window.draw(circle)
     end
 
     def draw_player(window)
