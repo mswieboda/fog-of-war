@@ -6,6 +6,7 @@ module Cave
 
     getter points : Array(Point)
 
+    PointLineCollisionPrecision = 0.001
     Color = SF::Color.new(38, 25, 17)
     Thickness = 8
 
@@ -65,11 +66,10 @@ module Cave
       # since floats are so minutely accurate, add
       # a little buffer zone that will give collision
       # higher is less accurate
-      buffer = 0.1
 
       # if the two distances are within the line's length
-      # with buffer range, the point is on the line
-      d1 + d2 > length - buffer && d1 + d2 <= length + buffer
+      # within the precision threshold range, the point is on the line
+      d1 + d2 > length - PointLineCollisionPrecision && d1 + d2 <= length + PointLineCollisionPrecision
     end
 
     def line_distance(x1, y1, x2, y2)
