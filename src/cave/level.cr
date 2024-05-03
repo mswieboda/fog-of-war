@@ -105,8 +105,8 @@ module Cave
 
       min_col = ((x - min_x) / FloorTile.size).to_i
       min_row = ((y - min_y) / FloorTile.size).to_i
-      max_col = ((x + size - min_x) / FloorTile.size).to_i
-      max_row = ((y + size - min_y) / FloorTile.size).to_i
+      max_col = ((x + size - min_x) / FloorTile.size).ceil.to_i
+      max_row = ((y + size - min_y) / FloorTile.size).ceil.to_i
 
       # check these tiles against player visibility circle
       (min_col..max_col).each do |col|
