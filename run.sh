@@ -25,4 +25,4 @@ if ! [[ -f $FRAMEWORKS/$SFML_EXTLIB ]]; then
   echo "installed SFML external dependencies to $FRAMEWORKS"
 fi
 
-$dir/cave.o
+$dir/fog_of_war.o

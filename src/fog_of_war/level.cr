@@ -3,7 +3,7 @@ require "./line"
 require "json"
 require "uuid"
 
-module Cave
+module FogOfWar
   class Level
     alias FloorTiles = Hash(Int32, Hash(Int32, FloorTile))
 

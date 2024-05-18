@@ -1,4 +1,4 @@
-# cave
+# fog of war
 
 ## Installation
 
@@ -44,7 +44,7 @@ make winpack
 
 you'll need `7z` ([7zip](https://www.7-zip.org/) binary) installed ([download](https://www.7-zip.org/))
 
-zips up SFML DLLs, assets, `run.bat` (basically the .exe) to `build/cave-win.zip`
+zips up SFML DLLs, assets, `run.bat` (basically the .exe) to `build/fog_of_war-win.zip`
 
 #### Mac
 
@@ -58,7 +58,7 @@ you'll need installed:
 - `7zz` ([7zip](https://www.7-zip.org/) binary) via `brew install 7zip`
 - `platypus` ([Platypus](https://sveinbjorn.org/platypus) binary) via `brew install --cask platypus` then in `Platypus > Preferences` install the command line tool
 
-zips up SFML libs, ext libs, assets, `cave.app` (created by [Platypus](https://sveinbjorn.org/platypus)) to `build/cave-mac.zip`
+zips up SFML libs, ext libs, assets, `fog_of_war.app` (created by [Platypus](https://sveinbjorn.org/platypus)) to `build/fog_of_war-mac.zip`
 
 
 ## Tools

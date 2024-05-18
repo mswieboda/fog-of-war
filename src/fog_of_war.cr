@@ -1,8 +1,8 @@
 require "game_sf"
 
-require "./cave/game"
+require "./fog_of_war/game"
 
-module Cave
+module FogOfWar
   alias Keys = GSF::Keys
   alias Mouse = GSF::Mouse
   alias Joysticks = GSF::Joysticks

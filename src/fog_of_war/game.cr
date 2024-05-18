@@ -1,6 +1,6 @@
 require "./stage"
 
-module Cave
+module FogOfWar
   class Game < GSF::Game
     getter manager
 
@@ -15,7 +15,7 @@ module Cave
         style = SF::Style::Default
       {% end %}
 
-      super(title: "cave", mode: mode, style: style)
+      super(title: "fog of war", mode: mode, style: style)
 
       @stage = Stage.new(window)
     end

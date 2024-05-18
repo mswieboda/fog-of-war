@@ -1,12 +1,12 @@
-name: cave
+name: fog_of_war
 version: 0.1.1
 
 authors:
   - Matt Swieboda <mswieboda@users.noreply.github.com>
 
 targets:
-  cave:
-    main: src/cave.cr
+  fog_of_war:
+    main: src/fog_of_war.cr
 
 dependencies:
   game_sf:

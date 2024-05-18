@@ -3,7 +3,7 @@ require "../level"
 require "../player"
 require "../hud"
 
-module Cave::Scene
+module FogOfWar::Scene
   class Main < GSF::Scene
     getter view : GSF::View
     getter level_data : LevelData

@@ -1,6 +1,6 @@
 require "./font"
 
-module Cave
+module FogOfWar
   class HUD
     getter text
 

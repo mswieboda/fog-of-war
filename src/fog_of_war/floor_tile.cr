@@ -1,4 +1,4 @@
-module Cave
+module FogOfWar
   enum Visibility : UInt8
     None
     Fog

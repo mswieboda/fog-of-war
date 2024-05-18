@@ -1,4 +1,4 @@
-module Cave::Scene
+module FogOfWar::Scene
   class Start < GSF::Scene
     getter start_scene : Symbol?
     getter items

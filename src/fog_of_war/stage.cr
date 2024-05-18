@@ -2,7 +2,7 @@ require "./scene/start"
 require "./scene/main"
 require "./scene/editor"
 
-module Cave
+module FogOfWar
   class Stage < GSF::Stage
     getter start
     getter main

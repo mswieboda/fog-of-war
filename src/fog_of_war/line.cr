@@ -1,6 +1,6 @@
 require "json"
 
-module Cave
+module FogOfWar
   class Line
     include JSON::Serializable
 

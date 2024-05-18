@@ -9,9 +9,9 @@ Documentation/DocumentationAdmonition:
   Description: Reports documentation admonitions
   Timezone: UTC
   Excluded:
-  - src/cave/line.cr
-  - src/cave/level_data.cr
-  - src/cave/player.cr
+  - src/fog_of_war/line.cr
+  - src/fog_of_war/level_data.cr
+  - src/fog_of_war/player.cr
   Admonitions:
   - TODO
   - FIXME
@@ -25,10 +25,10 @@ Lint/Formatting:
   Description: Reports not formatted sources
   FailOnError: false
   Excluded:
-  - src/cave/line.cr
-  - src/cave/floor_tile.cr
-  - src/cave/player.cr
-  - src/cave/scene/editor.cr
+  - src/fog_of_war/line.cr
+  - src/fog_of_war/floor_tile.cr
+  - src/fog_of_war/player.cr
+  - src/fog_of_war/scene/editor.cr
   Enabled: true
   Severity: Warning
 
@@ -37,7 +37,7 @@ Lint/Formatting:
 Performance/ExcessiveAllocations:
   Description: Identifies usage of excessive collection allocations
   Excluded:
-  - src/cave/line.cr
+  - src/fog_of_war/line.cr
   CallNames:
     codepoints: each_codepoint
     graphemes: each_grapheme

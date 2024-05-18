@@ -1,7 +1,7 @@
 require "../level_data"
 require "../level"
 
-module Cave::Scene
+module FogOfWar::Scene
   class Editor < GSF::Scene
     getter view : GSF::View
     getter level_data : LevelData
