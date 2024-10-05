@@ -9,7 +9,7 @@ module FogOfWar
       when .none?
         SF::Color.new(0, 0, 0)
       when .fog?
-        SF::Color.new(0, 0, 0, 223)
+        SF::Color.new(0, 0, 0, 159)
       when .clear?
         SF::Color::Transparent
       else
